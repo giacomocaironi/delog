@@ -1,5 +1,5 @@
-use core::sync::atomic::{AtomicUsize, Ordering};
 use core::{cmp, ptr};
+use portable_atomic::{AtomicUsize, Ordering};
 
 /// Semi-abstract characterization of the deferred loggers that the `delog!` macro produces.
 ///
@@ -253,33 +253,33 @@ macro_rules! delog {
             }
         }
 
-        impl $crate::State<&'static core::sync::atomic::AtomicUsize> for $logger {
-            fn attempts(&self) -> &'static core::sync::atomic::AtomicUsize {
-                use core::sync::atomic::AtomicUsize;
+        impl $crate::State<&'static portable_atomic::AtomicUsize> for $logger {
+            fn attempts(&self) -> &'static portable_atomic::AtomicUsize {
+                use portable_atomic::AtomicUsize;
                 static LOG_ATTEMPT_COUNT: AtomicUsize = AtomicUsize::new(0);
                 &LOG_ATTEMPT_COUNT
             }
 
-            fn successes(&self) -> &'static core::sync::atomic::AtomicUsize {
-                use core::sync::atomic::AtomicUsize;
+            fn successes(&self) -> &'static portable_atomic::AtomicUsize {
+                use portable_atomic::AtomicUsize;
                 static LOG_SUCCESS_COUNT: AtomicUsize = AtomicUsize::new(0);
                 &LOG_SUCCESS_COUNT
             }
 
-            fn flushes(&self) -> &'static core::sync::atomic::AtomicUsize {
-                use core::sync::atomic::AtomicUsize;
+            fn flushes(&self) -> &'static portable_atomic::AtomicUsize {
+                use portable_atomic::AtomicUsize;
                 static LOG_FLUSH_COUNT: AtomicUsize = AtomicUsize::new(0);
                 &LOG_FLUSH_COUNT
             }
 
-            fn read(&self) -> &'static core::sync::atomic::AtomicUsize {
-                use core::sync::atomic::AtomicUsize;
+            fn read(&self) -> &'static portable_atomic::AtomicUsize {
+                use portable_atomic::AtomicUsize;
                 static READ: AtomicUsize = AtomicUsize::new(0);
                 &READ
             }
 
-            fn written(&self) -> &'static core::sync::atomic::AtomicUsize {
-                use core::sync::atomic::AtomicUsize;
+            fn written(&self) -> &'static portable_atomic::AtomicUsize {
+                use portable_atomic::AtomicUsize;
                 static WRITTEN: AtomicUsize = AtomicUsize::new(0);
                 &WRITTEN
             }
@@ -296,8 +296,8 @@ macro_rules! delog {
                 self.flusher.flush(logs)
             }
 
-            fn claimed(&self) -> &'static core::sync::atomic::AtomicUsize {
-                use core::sync::atomic::AtomicUsize;
+            fn claimed(&self) -> &'static portable_atomic::AtomicUsize {
+                use portable_atomic::AtomicUsize;
                 static CLAIMED: AtomicUsize = AtomicUsize::new(0);
                 &CLAIMED
             }
@@ -408,33 +408,33 @@ macro_rules! delog {
             pub fn flush() {}
         }
 
-        impl $crate::State<&'static core::sync::atomic::AtomicUsize> for $logger {
-            fn attempts(&self) -> &'static core::sync::atomic::AtomicUsize {
-                use core::sync::atomic::AtomicUsize;
+        impl $crate::State<&'static portable_atomic::AtomicUsize> for $logger {
+            fn attempts(&self) -> &'static portable_atomic::AtomicUsize {
+                use portable_atomic::AtomicUsize;
                 static LOG_ATTEMPT_COUNT: AtomicUsize = AtomicUsize::new(0);
                 &LOG_ATTEMPT_COUNT
             }
 
-            fn successes(&self) -> &'static core::sync::atomic::AtomicUsize {
-                use core::sync::atomic::AtomicUsize;
+            fn successes(&self) -> &'static portable_atomic::AtomicUsize {
+                use portable_atomic::AtomicUsize;
                 static LOG_SUCCESS_COUNT: AtomicUsize = AtomicUsize::new(0);
                 &LOG_SUCCESS_COUNT
             }
 
-            fn flushes(&self) -> &'static core::sync::atomic::AtomicUsize {
-                use core::sync::atomic::AtomicUsize;
+            fn flushes(&self) -> &'static portable_atomic::AtomicUsize {
+                use portable_atomic::AtomicUsize;
                 static LOG_FLUSH_COUNT: AtomicUsize = AtomicUsize::new(0);
                 &LOG_FLUSH_COUNT
             }
 
-            fn read(&self) -> &'static core::sync::atomic::AtomicUsize {
-                use core::sync::atomic::AtomicUsize;
+            fn read(&self) -> &'static portable_atomic::AtomicUsize {
+                use portable_atomic::AtomicUsize;
                 static READ: AtomicUsize = AtomicUsize::new(0);
                 &READ
             }
 
-            fn written(&self) -> &'static core::sync::atomic::AtomicUsize {
-                use core::sync::atomic::AtomicUsize;
+            fn written(&self) -> &'static portable_atomic::AtomicUsize {
+                use portable_atomic::AtomicUsize;
                 static WRITTEN: AtomicUsize = AtomicUsize::new(0);
                 &WRITTEN
             }
@@ -447,8 +447,8 @@ macro_rules! delog {
 
             fn flush(&self, logs: &str) {}
 
-            fn claimed(&self) -> &'static core::sync::atomic::AtomicUsize {
-                use core::sync::atomic::AtomicUsize;
+            fn claimed(&self) -> &'static portable_atomic::AtomicUsize {
+                use portable_atomic::AtomicUsize;
                 static CLAIMED: AtomicUsize = AtomicUsize::new(0);
                 &CLAIMED
             }
